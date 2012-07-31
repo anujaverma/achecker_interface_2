@@ -69,27 +69,35 @@ $lang_charset = "UTF-8";
 	<link rel="shortcut icon" href="<?php echo $this->base_path; ?>images/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="<?php echo $this->base_path.'themes/'.$this->theme; ?>/forms.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $this->base_path.'themes/'.$this->theme; ?>/styles.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo $this->base_path.'themes/'.$this->theme; ?>/prettify.css" type="text/css" />
+	<!--<link rel="stylesheet" href="<?php echo $this->base_path.'themes/'.$this->theme; ?>/desert.css" type="text/css" />-->
 	<!--[if IE]>
 	  <link rel="stylesheet" href="<?php echo $this->base_path.'themes/'.$this->theme; ?>/ie_styles.css" type="text/css" />
 	<![endif]-->
 	<script src="<?php echo $this->base_path; ?>jscripts/lib/jquery.js" type="text/javascript"></script>
+		<script src="<?php echo $this->base_path; ?>jscripts/lib/prettify.js" type="text/javascript"></script>
 	<script src="<?php echo $this->base_path; ?>jscripts/lib/jquery-URLEncode.js" type="text/javascript"></script>
 	<script src="<?php echo $this->base_path; ?>jscripts/AChecker.js" type="text/javascript"></script>   
 	<?php echo $this->rtl_css; ?>
 	<?php echo $this->custom_head; ?>
+	<script language="JavaScript" src="jscripts/sha-1factory.js" type="text/javascript"></script>
 	<script type="text/javascript">
 /* 
+
  * Encrypt login password with sha1
  */
 function encrypt_password() {
+
 	document.form.form_password_hidden.value = hex_sha1(hex_sha1(document.form.form_password.value) + "<?php echo $_SESSION['token']; ?>");
+	alert("asd");
 	document.form.form_password.value = "";
+
 	return true;
 }
 </script>
 </head>
 
-<body onload="<?php echo $this->onload; ?>">
+<body onload="prettyPrint()" onload="<?php echo $this->onload; ?>">
 
 <?php if (isset($this->show_jump_to_report)){ ?>
 <a href="checker/index.php#output_div"><img src="images/clr.gif" height="1" width="1" alt="<?php echo _AC("jump_to_report"); ?>" border="0" /></a>
@@ -116,11 +124,11 @@ function encrypt_password() {
         {
         ?>
 			
-				<form action="" method="post" name="form1">
-				<input type="hidden" name="form_login_action" value="true" />
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+<input type="hidden" name="form_login_action" value="true" />
 <input type="hidden" name="form_course_id" value="<?php echo $this->course_id; ?>" />
 <input type="hidden" name="form_password_hidden" value="" />
-		<table width="300" height="130">
+<table width="300" height="130">
   <tr>
     <td width="50%"><div class="required" title="<?php echo _AC('required_field'); ?>">*</div><label for="login"><?php echo _AC('login_name_or_email'); ?></label> </td>
     <td><input type="text" name="form_login"  id="login"  class="formfield" /><br /></td>
@@ -130,8 +138,8 @@ function encrypt_password() {
     <td><input type="password" class="formfield" name="form_password" id="pass"/></td>
   </tr>
   <tr>
-    <td colspan="2">
-<p class="submit_button" align="center">
+    <td colspan="2" align="center">
+<p class="submit_button">
 						<input type="submit" name="submit" value="<?php echo _AC('login'); ?>" class="submit" onclick="return encrypt_password();" /> 
 					</p>
 </td>

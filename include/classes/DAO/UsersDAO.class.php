@@ -34,6 +34,7 @@ class UsersDAO extends DAO {
 	 *          false, if login/pwd is invalid
 	 * @author  Cindy Qi Li
 	 */
+
 	public function Validate($login, $pwd)
 	{
 		global $addslashes;

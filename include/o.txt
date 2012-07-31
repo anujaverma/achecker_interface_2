@@ -1,4 +1,0 @@
-but i think this should work
-11:11	anirudh	See check_create_edit.php
-11:12	anirudh	from line 79 to 82
-11:12	anirudh	there when particular condition is satisfied page is redirected
